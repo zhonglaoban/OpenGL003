@@ -8,15 +8,15 @@
 ## 在顶点缓冲区中添加颜色的值
 我们只需要在之前的顶点数组里面，为每个顶点加入一个颜色的数值（rgb）。
 ```objc
-- (void)setupVAO {
+- (void)setupVBO {
     GLfloat triangleVertices[] = {
         //position      color
         -0.4, 0.0, 0.0, 1.0, 0.0, 0.0,
          0.0, 0.4, 0.0, 0.0, 1.0, 0.0,
          0.5, 0.0, 0.0, 0.0, 0.0, 1.0,
     };
-    glGenBuffers(1, &_triangleVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, _triangleVAO);
+    glGenBuffers(1, &_triangleVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, _triangleVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangleVertices), triangleVertices, GL_STATIC_DRAW);
     
     GLfloat rectangleVertices[] = {
@@ -26,8 +26,8 @@
          0.4, -0.8, 0.0, 0.0, 0.0, 1.0,
          0.4, -0.4, 0.0, 0.0, 1.0, 0.0,
     };
-    glGenBuffers(1, &_rectangleVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, _rectangleVAO);
+    glGenBuffers(1, &_rectangleVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, _rectangleVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), rectangleVertices, GL_STATIC_DRAW);
 }
 ```
@@ -42,7 +42,7 @@
     glClear(GL_COLOR_BUFFER_BIT);
     
     [_triangleShader prepareToDraw];
-    glBindBuffer(GL_ARRAY_BUFFER, _triangleVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, _triangleVBO);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(1);
@@ -50,7 +50,7 @@
     glDrawArrays(GL_TRIANGLES, 0, 3);
     
     [_rectangleShader prepareToDraw];
-    glBindBuffer(GL_ARRAY_BUFFER, _rectangleVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, _rectangleVBO);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(1);
